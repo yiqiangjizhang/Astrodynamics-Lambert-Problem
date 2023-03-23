@@ -23,7 +23,7 @@ function [mu_Sun, mu_Earth, mu_Mars, R_Sun, R_Earth, R_Mars] = get_astro_constan
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, get_astro_constants.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, get_astro_constants.m
     %
     % -------------------------------------------------------------------------
 

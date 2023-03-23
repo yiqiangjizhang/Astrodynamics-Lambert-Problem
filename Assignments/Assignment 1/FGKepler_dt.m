@@ -26,7 +26,7 @@ function [rf, rf_dot, delta_E_sol, F, G] = FGKepler_dt(mu, r0, r0_dot, delta_t)
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, FGKepler_dt.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, FGKepler_dt.m
     %
     % -------------------------------------------------------------------------
 

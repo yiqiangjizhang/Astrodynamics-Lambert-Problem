@@ -28,7 +28,7 @@ function [delta_V_total] = get_total_deltaV(mu_1, mu_2, r_park, r_op, v_c1, v_c2
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, get_total_deltaV.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, get_total_deltaV.m
     %
     % -------------------------------------------------------------------------
 

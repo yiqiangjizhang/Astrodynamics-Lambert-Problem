@@ -21,7 +21,7 @@ function [rf] = FGKepler_trA(mu, r0, r0_dot, delta_theta)
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, MinETransfer.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, MinETransfer.m
     %
     % -------------------------------------------------------------------------
 

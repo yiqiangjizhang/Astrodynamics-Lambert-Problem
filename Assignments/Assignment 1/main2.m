@@ -250,7 +250,7 @@ end
 %% Plots
 
 % Plot Delta V Pork-Chop plot
-figure('position', [500, 500, 1000, 420])
+plot_pdf_1 = figure('position', [500, 500, 1000, 420]);
 hold on
 contourf(DepartureGrid, ArrivalGrid, DV_solutions', minDV:0.1:8.5);
 % plot(InTime_0, FinTime_1, 'MarkerFaceColor', [0 0 0], 'MarkerEdgeColor', [0, 0, 0], ...
@@ -262,9 +262,10 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Delta V]}')
 hold off
+save_plot(plot_pdf_1, 'plot1_delta_V_pork_chop', 1000)
 
 % Plot Dry mass Pork-Chop plot
-figure('position', [500, 500, 1000, 420])
+plot_pdf_2 = figure('position', [500, 500, 1000, 420]);
 contourf(DepartureGrid, ArrivalGrid, mass_solutions', 0:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
@@ -273,9 +274,10 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Mass]}')
 hold off
+save_plot(plot_pdf_2, 'plot2_delta_V_pork_chop', 1000)
 
 % Plot Dry mass Pork-Chop plot from 600 kg to max
-figure('position', [500, 500, 1000, 420])
+plot_pdf_3 = figure('position', [500, 500, 1000, 420]);
 contourf(DepartureGrid, ArrivalGrid, mass_solutions', 600:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
@@ -284,9 +286,11 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Mass semi-filtered]}')
 hold off
+save_plot(plot_pdf_3, 'plot3_mass_semifiltered_pork_chop', 1000)
+
 
 % Plot Dry mass Pork-Chop plot that are valid (>=1250 kg, spacecraft dry mass)
-figure('position', [500, 500, 1000, 420])
+plot_pdf_4 = figure('position', [500, 500, 1000, 420]);
 contourf(DepartureGrid, ArrivalGrid, mass_solutions_filtered', spc_mass:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
@@ -295,9 +299,11 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Valid Dry Masses]}')
 hold off
+save_plot(plot_pdf_4, 'plot4_mass_filtered_pork_chop', 1000)
+
 
 % Overall pork chop plot with launcher C3 parameter
-figure('position', [500, 500, 1000, 420])
+plot_pdf_5 = figure('position', [500, 500, 1000, 420]);
 
 % Set levels to plot
 C3_levels = 11:2:40;
@@ -326,6 +332,10 @@ clabel(c3, h3, 'Color', col3)
 clabel(c4, h4, 'Color', col3)
 xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
-title('\textbf{Pork Chop plot for Earth - Mars trajectory [Valid Dry Masses]}')
+title('\textbf{Pork Chop plot for Earth - Mars trajectory}')
 legend({'$v_{\infty \, \mathrm{arrival}}$ [km/s]', '${\rm C}_3$ Proton [km$^2$/s$^2$]', 'TOF [days]', '$\Delta V_{\mathrm{total}}$ [km/s]'}, 'Location', 'northeastoutside')
 hold off
+save_plot(plot_pdf_5, 'plot5_overall_pork_chop', 1000)
+
+%% Save session results
+save data.mat

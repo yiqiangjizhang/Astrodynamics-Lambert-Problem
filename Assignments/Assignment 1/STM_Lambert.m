@@ -26,7 +26,7 @@ function [STM] = STM_Lambert(mu, rf, delta_E, F, G, r0, r0_dot, delta_t)
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, STM_Lambert.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, STM_Lambert.m
     %
     % -------------------------------------------------------------------------
 

@@ -27,7 +27,7 @@ function [a_min, e_min, delta_t_min, r1_dot, delta_theta] = MinETransfer(mu, r1,
     %   None
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, MinETransfer.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, MinETransfer.m
     %
     % -------------------------------------------------------------------------
 

@@ -25,7 +25,7 @@ function [r1_dot, rf_dot_trans_real] = LambertArc(mu, r_dep_Earth, r_arr_Mars, t
     %   MinETransfer, FGKepler_dt, STM_Lambert
     %
     % AUTHOR:
-    %   Yi Qiang Ji, 23/03/2023, MATLAB, LambertArc.m
+    %   Yi Qiang Ji Zhang, 23/03/2023, MATLAB, LambertArc.m
     %
     % -------------------------------------------------------------------------
 
