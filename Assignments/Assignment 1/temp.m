@@ -120,18 +120,23 @@ for k = 1:length(ArrivalGrid)
         % Delta_V matrix solutions
         [DV_solutions(j, k), indexMin(j, k)] = min([delta_V_total_short delta_V_total_long]);
 
-        % Check which maneuvre is better
-        if indexMin(j, k) == 1
-            r1_dot = r1_dot_short;
-            rf_dot = rf_dot_trans_real_short;
-        else
-            r1_dot = r1_dot_long;
-            rf_dot = rf_dot_trans_real_long;
-        end
+        % % Check which maneuvre is better
+        % if indexMin(j, k) == 1
+        %     r1_dot = r1_dot_short;
+        %     rf_dot = rf_dot_trans_real_short;
+        % else
+        %     r1_dot = r1_dot_long;
+        %     rf_dot = rf_dot_trans_real_long;
+        % end
 
-        v_inf_Earth = norm(v_dep_Earth - r1_dot);
-        v_inf_Mars = norm(v_arr_Mars - rf_dot);
-        v_p_Mars = sqrt(mu_Mars * ((2 / r_op) + v_inf_Mars ^ 2 / mu_Mars));
+        v_inf_Earth_short = norm(v_dep_Earth - r1_dot_short);
+        v_inf_Earth_long = norm(v_dep_Earth - r1_dot_long);
+
+        v_inf_Mars_short = norm(v_arr_Mars - rf_dot_short);
+        v_inf_Mars_long = norm(v_arr_Mars - rf_dot_long);
+
+        v_p_Mars_short = sqrt(mu_Mars * ((2 / r_op) + v_inf_Mars_short ^ 2 / mu_Mars));
+        v_p_Mars_long = sqrt(mu_Mars * ((2 / r_op) + v_inf_Mars_long ^ 2 / mu_Mars));
 
         % Wet mass
         if v_inf_Earth <= v_inf_max
