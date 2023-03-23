@@ -74,6 +74,11 @@ DV_solutions = zeros(length(DepartureGrid), length(ArrivalGrid));
 mass_solutions = zeros(length(DepartureGrid), length(DepartureGrid));
 indexMin = zeros(length(DepartureGrid), length(ArrivalGrid));
 
+% Plot matrices
+C3_matrix = zeros(length(DepartureGrid), length(DepartureGrid));
+TOF_matrix = zeros(length(DepartureGrid), length(DepartureGrid));
+v_inf_matrix = zeros(length(DepartureGrid), length(DepartureGrid));
+
 % Short way in Lambert problem
 t_m = [1 -1]; % Short and long path
 
@@ -135,12 +140,12 @@ for k=1:length(ArrivalGrid)
 
         % Wet mass
         if v_inf_Earth <= v_inf_max
-            C3 = v_inf_Earth^2;
-            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3);
+            C3_matrix(j,k) = v_inf_Earth^2;
+            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3_matrix(j,k));
         else
             v_inf_launcher = v_inf_max;
-            C3 = v_inf_launcher^2;
-            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3, 'spline');
+            C3_matrix(j,k) = v_inf_launcher^2;
+            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3_matrix(j,k), 'spline');
         end
         
         delta_V_2 = v_p_Mars - v_c_Mars;
@@ -148,6 +153,11 @@ for k=1:length(ArrivalGrid)
 
         % Compute the dry mass matrix solutions
         mass_solutions(j,k) = dry_mass;
+
+
+        % TOF days
+        TOF_matrix(j,k) = ArrivalGrid(k) - DepartureGrid(j); % [days]
+        v_inf_matrix(j,k) = v_inf_Mars;
     end
 
 end 
@@ -257,3 +267,35 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Valid Dry Masses]}')
 hold off
+
+
+%%
+
+C3_levels = 11:2:40;
+TOF_levels = 100:50:500;
+v_inf_levels = 1:1:10;
+
+col1=[0.8,0.2,0.2];
+col2=[0.2,0.2,0.8];
+col3 = [0.4,0.4,0.4];
+
+% close all
+% figure('position',[200,200, 800, 600])
+figure
+set(gcf, 'color', 'w')
+hold on
+grid on
+grid minor
+[c1,h1]=contour(DepartureGrid, ArrivalGrid, v_inf_matrix', v_inf_levels, 'color', col1,'linewidth',1.25);
+[c2,h2]=contour(DepartureGrid, ArrivalGrid, C3_matrix', C3_levels, 'color', col2,'linewidth',1.25);
+[c3,h3]=contour(DepartureGrid, ArrivalGrid, TOF_matrix', TOF_levels, 'color', col3);
+hold off
+% Comment out to turn off contour labels:
+clabel(c1,h1,'Color',col1)
+clabel(c2,h2,'Color',col2)
+clabel(c3,h3,'Color',col3)
+box on
+xlabel('Earth departure dates [MJD2000]')
+ylabel('Mars arrival dates [MJD2000]')
+title('\textbf{Pork Chop plot for Earth - Mars trajectory [Valid Dry Masses]}')
+legend({'$v_{\infty}$ arrival [km/s]','${\rm C}_3$ [km$^2$/s$^2$]','TOF [days]'},'Location','northeastoutside')

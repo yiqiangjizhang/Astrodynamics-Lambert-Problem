@@ -2,10 +2,10 @@
 %                        Cranfield University
 %    Mathematics and Programming for Astrodynamics and Trajectory Design
 %                      Student: Yi Qiang Ji Zhang
-%
-%        Copyright Cranfield University 2023, All Rights Reserved
-%
-%
+%                           
+%        Copyright Cranfield University 2023, All Rights Reserved 
+% 
+%                
 %%=========================================================================
 %                            Assignment 1
 
@@ -17,13 +17,14 @@ close all;
 clc;
 
 % Set interpreter to latex
-set(groot, 'defaultAxesTickLabelInterpreter', 'latex');
-set(groot, 'defaulttextinterpreter', 'latex');
-set(groot, 'defaultLegendInterpreter', 'latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');  
+set(groot,'defaulttextinterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+
 
 % Problem statement
 %{
-Exercise 3.
+Exercise 3. 
 %}
 
 %% Main
@@ -31,13 +32,13 @@ Exercise 3.
 % Spacecraft
 spc_mass = 1250; % [kg] Dry mass
 Isp = 310; % [s]
-v_e = 9.81 * Isp; % [m/s]
+v_e = 9.81*Isp; % [m/s]
 
 % Get astronomical parameters
 [mu_Sun, mu_Earth, mu_Mars, R_Sun, R_Earth, R_Mars] = get_astro_constants();
 
 % Planet number
-n_Earth = 3;
+n_Earth = 3; 
 n_Mars = 4;
 
 % Departure dates
@@ -82,27 +83,26 @@ hf = 400; % [km]
 
 % Earth circular parking orbit
 r_park = R_Earth + h0; % [km]
-v_c_Earth = sqrt(mu_Earth * (1 / r_park)); % Velocity in parking orbit
+v_c_Earth = sqrt(mu_Earth*(1/r_park)); % Velocity in parking orbit
 
 % Mars Arrival
 r_op = R_Mars + hf; % Operational orbit
-v_c_Mars = sqrt(mu_Mars * (1 / r_op)); % Velocity in operational orbit
+v_c_Mars = sqrt(mu_Mars*(1/r_op)); % Velocity in operational orbit
 
 % Max v_inf
 v_inf_max = sqrt(F9_C3_vec(end)); % [km/s]
 
 % Transfer delta_V using patched conics
-for k = 1:length(ArrivalGrid)
-
-    for j = 1:length(DepartureGrid)
-
+for k=1:length(ArrivalGrid)
+    for j=1:length(DepartureGrid)
+        
         % Ephemerides of Earth and Mars
-        [r_dep_Earth, v_dep_Earth] = EphSS_car(n_Earth, DepartureGrid(j)); % [m and m/s]
-        [r_arr_Mars, v_arr_Mars] = EphSS_car(n_Mars, ArrivalGrid(k)); % [m and m/s]
-
+        [r_dep_Earth,v_dep_Earth] = EphSS_car(n_Earth, DepartureGrid(j)); % [m and m/s]
+        [r_arr_Mars,v_arr_Mars] = EphSS_car(n_Mars, ArrivalGrid(k)); % [m and m/s]
+        
         % Time of Flight
-        delta_t_target = (ArrivalGrid(k) - DepartureGrid(j)) * 24 * 3600;
-
+        delta_t_target = (ArrivalGrid(k) - DepartureGrid(j))*24*3600;
+        
         % Short path
         [r1_dot_short, rf_dot_trans_real_short] = LambertArc(mu_Sun, r_dep_Earth, v_dep_Earth, ...
             r_arr_Mars, v_arr_Mars, t_m(1), delta_t_target);
@@ -118,10 +118,10 @@ for k = 1:length(ArrivalGrid)
             r1_dot_long, rf_dot_trans_real_long, v_dep_Earth, v_arr_Mars);
 
         % Delta_V matrix solutions
-        [DV_solutions(j, k), indexMin(j, k)] = min([delta_V_total_short delta_V_total_long]);
-
+        [DV_solutions(j,k),indexMin(j,k)] = min([delta_V_total_short delta_V_total_long]);
+        
         % Check which maneuvre is better
-        if indexMin(j, k) == 1
+        if indexMin(j,k) == 1
             r1_dot = r1_dot_short;
             rf_dot = rf_dot_trans_real_short;
         else
@@ -131,26 +131,26 @@ for k = 1:length(ArrivalGrid)
 
         v_inf_Earth = norm(v_dep_Earth - r1_dot);
         v_inf_Mars = norm(v_arr_Mars - rf_dot);
-        v_p_Mars = sqrt(mu_Mars * ((2 / r_op) + v_inf_Mars ^ 2 / mu_Mars));
+        v_p_Mars = sqrt(mu_Mars*((2/r_op) + v_inf_Mars^2/mu_Mars));
 
         % Wet mass
         if v_inf_Earth <= v_inf_max
-            C3 = v_inf_Earth ^ 2;
-            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec, C3);
+            C3 = v_inf_Earth^2;
+            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3);
         else
             v_inf_launcher = v_inf_max;
-            C3 = v_inf_launcher ^ 2;
-            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec, C3, 'spline');
+            C3 = v_inf_launcher^2;
+            wet_mass = interp1(F9_C3_vec, F9_Wet_Mass_vec,C3, 'spline');
         end
-
+        
         delta_V_2 = v_p_Mars - v_c_Mars;
-        dry_mass = wet_mass * exp(- (delta_V_2 * 1000) / v_e);
+        dry_mass = wet_mass*exp(-(delta_V_2*1000)/v_e);
 
         % Compute the dry mass matrix solutions
-        mass_solutions(j, k) = dry_mass;
+        mass_solutions(j,k) = dry_mass;
     end
 
-end
+end 
 
 % Check boundaries of solutions
 minDV = min(min(DV_solutions));
@@ -171,9 +171,9 @@ dep_dates_sol = zeros(length(dep_dates), 1);
 arr_dates_sol = zeros(length(arr_dates), 1);
 
 % Get departure and arrival dates
-for i = 1:length(dep_dates)
-    dep_dates_sol(i, 1) = DepartureGrid(dep_dates(i));
-    arr_dates_sol(i, 1) = ArrivalGrid(arr_dates(i));
+for i=1:length(dep_dates)
+dep_dates_sol(i,1) = DepartureGrid(dep_dates(i));
+arr_dates_sol(i,1) = ArrivalGrid(arr_dates(i));
 end
 
 % Find the delta_V and dry masses
@@ -197,19 +197,19 @@ fprintf(formatSpec, headers{:});
 % Print results
 for i = 1:length(dep_dates)
 
-    dep_dates_sol_aux = mjd20002date(dep_dates_sol(i, 1));
-    arr_dates_sol_aux = mjd20002date(arr_dates_sol(i, 1));
-    dep_dates_sol_matrix(i, :) = dep_dates_sol_aux;
+    dep_dates_sol_aux = mjd20002date(dep_dates_sol(i,1));
+    arr_dates_sol_aux = mjd20002date(arr_dates_sol(i,1));
+    dep_dates_sol_matrix(i,:) = dep_dates_sol_aux;
 
-    launch_parameters(i, 1) = dep_dates_sol_matrix(i, 1);
-    launch_parameters(i, 2) = dep_dates_sol_matrix(i, 2);
-    launch_parameters(i, 3) = dep_dates_sol_matrix(i, 3);
-    launch_parameters(i, 4) = delta_V_sol(i);
-    launch_parameters(i, 5) = mass_sol(i);
+    launch_parameters(i,1) = dep_dates_sol_matrix(i,1);
+    launch_parameters(i,2) = dep_dates_sol_matrix(i,2);
+    launch_parameters(i,3) = dep_dates_sol_matrix(i,3);
+    launch_parameters(i,4) = delta_V_sol(i);
+    launch_parameters(i,5) = mass_sol(i);
 
     % Print results
-    fprintf(formatSpec2, dep_dates_sol_matrix(i, 1), ...
-        dep_dates_sol_matrix(i, 2), dep_dates_sol_matrix(i, 3), delta_V_sol(i), mass_sol(i));
+    fprintf(formatSpec2, dep_dates_sol_matrix(i,1), ...
+        dep_dates_sol_matrix(i,2), dep_dates_sol_matrix(i,3), delta_V_sol(i), mass_sol(i));
 end
 
 %% Plots
@@ -229,7 +229,7 @@ title('\textbf{Pork Chop plot for Earth - Mars trajectory [Delta V]}')
 hold off
 
 figure
-contourf(DepartureGrid, ArrivalGrid, mass_solutions', 0:50:maxMass);
+contourf(DepartureGrid, ArrivalGrid, mass_solutions',0:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
 col.Label.String = 'Mass [kg]';
@@ -239,7 +239,7 @@ title('\textbf{Pork Chop plot for Earth - Mars trajectory [Mass]}')
 hold off
 
 figure
-contourf(DepartureGrid, ArrivalGrid, mass_solutions', 600:50:maxMass);
+contourf(DepartureGrid, ArrivalGrid, mass_solutions',600:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
 col.Label.String = 'Mass [kg]';
@@ -249,7 +249,7 @@ title('\textbf{Pork Chop plot for Earth - Mars trajectory [Mass semi-filtered]}'
 hold off
 
 figure
-contourf(DepartureGrid, ArrivalGrid, mass_solutions_filtered', spc_mass:50:maxMass);
+contourf(DepartureGrid, ArrivalGrid, mass_solutions_filtered',spc_mass:50:maxMass);
 col = colorbar;
 col.Label.Interpreter = 'latex';
 col.Label.String = 'Mass [kg]';

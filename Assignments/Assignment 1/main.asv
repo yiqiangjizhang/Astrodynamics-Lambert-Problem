@@ -183,7 +183,7 @@ mass_sol = mass_solutions_filtered(~isnan(mass_solutions_filtered));
 dep_dates_sol_matrix = zeros(length(dep_dates), 6);
 
 % Final solution matrix
-launch_parameters = zeros(length(dep_dates),5);
+launch_parameters = zeros(length(dep_dates), 5);
 
 % Define the format string
 formatSpec = '%-12s %-13s %-11s %-18s %-21s\n';
@@ -201,8 +201,12 @@ for i = 1:length(dep_dates)
     arr_dates_sol_aux = mjd20002date(arr_dates_sol(i,1));
     dep_dates_sol_matrix(i,:) = dep_dates_sol_aux;
 
-    
-    
+    launch_parameters(i,1) = dep_dates_sol_matrix(i,1);
+    launch_parameters(i,2) = dep_dates_sol_matrix(i,2);
+    launch_parameters(i,3) = dep_dates_sol_matrix(i,3);
+    launch_parameters(i,4) = delta_V_sol(i);
+    launch_parameters(i,5) = mass_sol(i);
+
     % Print results
     fprintf(formatSpec2, dep_dates_sol_matrix(i,1), ...
         dep_dates_sol_matrix(i,2), dep_dates_sol_matrix(i,3), delta_V_sol(i), mass_sol(i));
