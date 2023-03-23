@@ -24,7 +24,7 @@ set(groot,'defaultLegendInterpreter','latex');
 
 % Problem statement
 %{
-Exercise 3. 
+Exercise 4. 
 %}
 
 %% Main

@@ -7,7 +7,7 @@
 % 
 %                
 %%=========================================================================
-%                            Exercise 3
+%                            Exercise 5
 
 %% Setup workspace
 
@@ -24,7 +24,7 @@ set(groot,'defaultLegendInterpreter','latex');
 
 % Problem statement
 %{
-Exercise 3. 
+Exercise 5. 
 %}
 
 %% Main

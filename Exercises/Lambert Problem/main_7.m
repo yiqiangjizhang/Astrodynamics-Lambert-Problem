@@ -7,7 +7,7 @@
 % 
 %                
 %%=========================================================================
-%                            Exercise 6
+%                            Exercise 7
 
 %% Setup workspace
 
@@ -24,7 +24,7 @@ set(groot,'defaultLegendInterpreter','latex');
 
 % Problem statement
 %{
-Exercise 3. 
+Exercise 7. 
 %}
 
 %% Main
@@ -69,8 +69,8 @@ propagation_theta = linspace(0,delta_theta,1000); % Transfer propagation
 delta_t_target = 215*24*3600; % [days]
 
 % Compute departure and arrival velocities
-[r1_dot, rf_dot_trans_real] = LambertArc(mu_Sun, r_dep_Earth, v_dep_Earth, ...
-    r_arr_Mars, v_arr_Mars, t_m, delta_t_target);
+[r1_dot, rf_dot_trans_real] = LambertArc(mu_Sun, r_dep_Earth, ...
+    r_arr_Mars, t_m, delta_t_target);
 
 % Delta V at departure and arrival
 delta_V_dep_trans_Earth = norm(r1_dot - v_dep_Earth);
