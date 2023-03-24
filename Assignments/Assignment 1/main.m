@@ -308,7 +308,9 @@ plot_pdf_5 = figure('position', [500, 500, 1000, 420]);
 % Set levels to plot
 C3_levels = 11:2:40;
 TOF_levels = 100:50:600;
-v_inf_levels = 1:1:10;
+v_inf_levels_0 = 0.5:0.5:3;
+v_inf_levels_1 = 3:1:10;
+v_inf_levels = [v_inf_levels_0 v_inf_levels_1];
 
 % Colors
 col1 = [0.8, 0.2, 0.2];
