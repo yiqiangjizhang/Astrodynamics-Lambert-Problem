@@ -80,7 +80,7 @@ FinTime_0 = 9225;
 FinTime_1 = 9550;
 
 % Departure and Arrival Grids
-incr = 1; % [days]
+incr = 5; % [days]
 DepartureGrid = InTime_0:incr:InTime_1;
 ArrivalGrid = FinTime_0:incr:FinTime_1;
 
