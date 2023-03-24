@@ -80,7 +80,7 @@ FinTime_0 = 9225;
 FinTime_1 = 9550;
 
 % Departure and Arrival Grids
-incr = 5; % [days]
+incr = 1; % [days]
 DepartureGrid = InTime_0:incr:InTime_1;
 ArrivalGrid = FinTime_0:incr:FinTime_1;
 
@@ -333,7 +333,7 @@ clabel(c4, h4, 'Color', col3)
 xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory}')
-legend({'$v_{\infty \, \mathrm{arrival}}$ [km/s]', '${\rm C}_3$ Proton [km$^2$/s$^2$]', 'TOF [days]', '$\Delta V_{\mathrm{total}}$ [km/s]'}, 'Location', 'northeastoutside')
+legend({'$v_{\infty \, \mathrm{arrival}}$ [km/s]', '${\rm C}_3$ FHeavy [km$^2$/s$^2$]', 'TOF [days]', '$\Delta V_{\mathrm{total}}$ [km/s]'}, 'Location', 'northeastoutside')
 hold off
 save_plot(plot_pdf_5, 'plot5_overall_pork_chop', 1000)
 
