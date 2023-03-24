@@ -80,7 +80,7 @@ FinTime_0 = 9225;
 FinTime_1 = 9550;
 
 % Departure and Arrival Grids
-incr = 5; % [days]
+incr = 1; % [days]
 DepartureGrid = InTime_0:incr:InTime_1;
 ArrivalGrid = FinTime_0:incr:FinTime_1;
 
@@ -274,7 +274,7 @@ xlabel('Earth departure dates [MJD2000]')
 ylabel('Mars arrival dates [MJD2000]')
 title('\textbf{Pork Chop plot for Earth - Mars trajectory [Mass]}')
 hold off
-save_plot(plot_pdf_2, 'plot2_delta_V_pork_chop', 1000)
+save_plot(plot_pdf_2, 'plot2_mass_pork_chop', 1000)
 
 % Plot Dry mass Pork-Chop plot from 600 kg to max
 plot_pdf_3 = figure('position', [500, 500, 1000, 420]);
